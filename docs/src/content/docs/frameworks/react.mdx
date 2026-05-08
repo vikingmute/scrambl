@@ -1,0 +1,157 @@
+---
+title: React
+description: React hooks and components for text scramble effects.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+## Installation
+
+```bash
+npm install @scrambl/react
+```
+
+## useScramble Hook
+
+The primary API for React — returns a ref and control functions.
+
+```tsx
+import { useScramble } from '@scrambl/react'
+
+function Hero() {
+  const { ref, replay, pause, resume, isPlaying } = useScramble({
+    text: 'Hello World',
+    chars: 'blocks',
+    from: 'left',
+    duration: 800,
+    trigger: 'hover',
+    playOnMount: true,
+  })
+
+  return (
+    <div>
+      <h1 ref={ref} />
+      <button onClick={replay}>Replay</button>
+    </div>
+  )
+}
+```
+
+### Options
+
+`useScramble` accepts all [ScrambleOptions](/api/options/) plus:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `trigger` | `'hover' \| 'click' \| 'inView' \| 'manual'` | `'manual'` | Auto-trigger behavior |
+| `playOnMount` | `boolean` | `true` | Play immediately on mount |
+| `inViewOptions` | `IntersectionObserverInit` | `{ threshold: 0.1 }` | Options for `trigger: 'inView'` |
+
+### Return Value
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `ref` | `RefCallback<HTMLElement>` | Attach to your target element |
+| `replay` | `() => void` | Restart the animation |
+| `pause` | `() => void` | Pause the animation |
+| `resume` | `() => void` | Resume a paused animation |
+| `isPlaying` | `boolean` | Whether the animation is playing |
+
+## ScrambleText Component
+
+A ready-to-use component for simpler cases:
+
+```tsx
+import { ScrambleText } from '@scrambl/react'
+
+function App() {
+  return (
+    <ScrambleText
+      as="h1"
+      text="Hello World"
+      chars="blocks"
+      trigger="hover"
+      className="title"
+    />
+  )
+}
+```
+
+### Props
+
+Accepts all `useScramble` options plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | element tag name | `'span'` | HTML element to render |
+| `className` | `string` | — | CSS class name(s) |
+| `style` | `CSSProperties` | — | Inline styles |
+
+### Ref
+
+Use `ref` to access the imperative API:
+
+```tsx
+import { useRef } from 'react'
+import { ScrambleText, type ScrambleTextRef } from '@scrambl/react'
+
+function App() {
+  const scrambleRef = useRef<ScrambleTextRef>(null)
+
+  return (
+    <>
+      <ScrambleText ref={scrambleRef} text="Hello" chars="blocks" />
+      <button onClick={() => scrambleRef.current?.replay()}>
+        Replay
+      </button>
+    </>
+  )
+}
+```
+
+## Patterns
+
+### Scroll Reveal
+
+```tsx
+function ScrollReveal({ text }: { text: string }) {
+  const { ref } = useScramble({
+    text,
+    chars: 'braille',
+    trigger: 'inView',
+    playOnMount: false,
+    duration: 1200,
+    from: 'random',
+  })
+
+  return <p ref={ref} />
+}
+```
+
+### Text Cycling
+
+```tsx
+import { useState, useEffect } from 'react'
+import { useScramble } from '@scrambl/react'
+
+const words = ['Developer', 'Designer', 'Creator']
+
+function CyclingText() {
+  const [index, setIndex] = useState(0)
+  const { ref, replay } = useScramble({
+    text: words[index],
+    chars: 'katakana',
+    duration: 600,
+  })
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % words.length)
+      replay()
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [replay])
+
+  return <span ref={ref} />
+}
+```

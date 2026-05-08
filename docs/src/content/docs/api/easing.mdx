@@ -1,0 +1,72 @@
+---
+title: Easing Functions
+description: Built-in easing functions for controlling animation curves.
+---
+
+## Built-in Easings
+
+Pass any easing name as the `ease` option:
+
+| Name | Curve | Description |
+|------|-------|-------------|
+| `linear` | — | Constant speed (default) |
+| `easeInQuad` | ⌒ | Slow start, accelerating |
+| `easeOutQuad` | ⌒ | Fast start, decelerating |
+| `easeInOutQuad` | S | Slow start and end |
+| `easeInCubic` | ⌒ | Stronger slow start |
+| `easeOutCubic` | ⌒ | Stronger fast start |
+| `easeInOutCubic` | S | Smooth acceleration curve |
+| `easeInQuart` | ⌒ | Very slow start |
+| `easeOutQuart` | ⌒ | Very fast start |
+| `easeInOutQuart` | S | Pronounced S-curve |
+| `easeInExpo` | ⌒ | Exponential start |
+| `easeOutExpo` | ⌒ | Exponential end |
+| `easeInOutExpo` | S | Dramatic S-curve |
+| `steps` | ▄▄▄ | Discrete steps (use `steps` option for count) |
+
+## Usage
+
+```ts
+import { scramble } from '@scrambl/core'
+
+// Named easing
+scramble(el, {
+  text: 'Hello',
+  ease: 'easeOutCubic',
+})
+
+// Stepped
+scramble(el, {
+  text: 'Loading...',
+  ease: 'steps',
+  steps: 5,
+})
+```
+
+## Custom Easing Functions
+
+Pass a function that maps `t` (0–1) to an output value (0–1):
+
+```ts
+// Bounce easing
+scramble(el, {
+  text: 'Bounce!',
+  ease: (t) => {
+    const n1 = 7.5625
+    const d1 = 2.75
+    if (t < 1 / d1) return n1 * t * t
+    if (t < 2 / d1) return n1 * (t -= 1.5 / d1) * t + 0.75
+    if (t < 2.5 / d1) return n1 * (t -= 2.25 / d1) * t + 0.9375
+    return n1 * (t -= 2.625 / d1) * t + 0.984375
+  },
+})
+```
+
+## Accessing Easing Functions
+
+```ts
+import { easings, resolveEasing } from '@scrambl/core'
+
+const ease = resolveEasing('easeOutCubic')
+console.log(ease(0.5)) // 0.875
+```

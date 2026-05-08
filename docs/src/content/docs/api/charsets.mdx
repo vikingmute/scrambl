@@ -1,0 +1,64 @@
+---
+title: Character Sets
+description: Built-in character set presets and custom charset usage.
+---
+
+## Presets
+
+Pass any preset name as the `chars` option:
+
+| Preset | Characters | Best For |
+|--------|-----------|----------|
+| `blocks` | `█▓▒░` | Terminal / cyberpunk aesthetic |
+| `shades` | `░▒▓` | Subtle density transitions |
+| `braille` | `⠁⠂⠃...⠿` (64 chars) | Dot-matrix / retro |
+| `katakana` | `アイウ...ン` (46 chars) | Matrix-style Japanese glyphs |
+| `binary` | `01` | Digital / hacker |
+| `hex` | `0123456789ABCDEF` | Hexadecimal / data |
+| `numbers` | `0123456789` | Numeric decoder |
+| `lowercase` | `a-z` | Subtle letter scramble |
+| `uppercase` | `A-Z` | Bold letter scramble |
+| `symbols` | `!@#$%^&*()_+-=[]{}...` | Cryptographic noise |
+
+## Custom Characters
+
+Pass any string to use your own character set:
+
+```ts
+scramble(el, {
+  text: 'Hello',
+  chars: '⚡🔥💀👾', // Emoji scramble
+})
+
+scramble(el, {
+  text: 'Price: $42.00',
+  chars: '$€£¥₿', // Currency symbols
+})
+```
+
+## Combining with Cursor
+
+The `cursor` option adds a sweep pattern at the reveal front. It works independently from `chars`:
+
+```ts
+scramble(el, {
+  text: 'Decrypting...',
+  chars: 'blocks',
+  cursor: '░▒▓█', // Block-style cursor sweep
+})
+
+scramble(el, {
+  text: 'Loading',
+  chars: 'binary',
+  cursor: '▌', // Simple bar cursor
+})
+```
+
+## Accessing Presets Programmatically
+
+```ts
+import { CHARSETS } from '@scrambl/core'
+
+console.log(CHARSETS.katakana)
+// → "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
+```

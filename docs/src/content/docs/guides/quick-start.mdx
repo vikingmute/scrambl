@@ -1,0 +1,107 @@
+---
+title: Quick Start
+description: Get up and running with Scrambl in under a minute.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+## Your First Scramble
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```html
+    <h1 id="title">Hello World</h1>
+
+    <script type="module">
+      import { scramble } from '@scrambl/core'
+
+      scramble(document.querySelector('#title'), {
+        text: 'Hello World',
+        chars: 'blocks',
+        from: 'left',
+        duration: 800,
+      })
+    </script>
+    ```
+  </TabItem>
+  <TabItem label="React">
+    ```tsx
+    import { useScramble } from '@scrambl/react'
+
+    export function Hero() {
+      const { ref, replay } = useScramble({
+        text: 'Hello World',
+        chars: 'blocks',
+        trigger: 'hover',
+      })
+
+      return <h1 ref={ref} onClick={replay} />
+    }
+    ```
+  </TabItem>
+  <TabItem label="Vue">
+    ```vue
+    <script setup>
+    import { useScramble } from '@scrambl/vue'
+
+    const { ref, replay } = useScramble({
+      text: 'Hello World',
+      chars: 'blocks',
+      trigger: 'hover',
+    })
+    </script>
+
+    <template>
+      <h1 ref="ref" @click="replay" />
+    </template>
+    ```
+  </TabItem>
+</Tabs>
+
+## Hover-to-Replay
+
+The most common pattern — text scrambles when the user hovers:
+
+```ts
+import { scramble } from '@scrambl/core'
+
+const el = document.querySelector('.title')
+
+// Initial scramble
+const instance = scramble(el, {
+  text: 'Hover me!',
+  chars: 'blocks',
+})
+
+// Re-scramble on hover
+el.addEventListener('pointerenter', () => {
+  instance.restart()
+})
+```
+
+## Start from Blank
+
+Use `override: ''` to start from empty text and reveal the target:
+
+```ts
+scramble(el, {
+  text: 'Revealed from nothing',
+  override: '',
+  chars: 'braille',
+  duration: 1200,
+  from: 'center',
+})
+```
+
+## Control Playback
+
+Every `scramble()` call returns an instance you can control:
+
+```ts
+const instance = scramble(el, { text: 'Hello', chars: 'blocks' })
+
+instance.pause()    // Freeze the animation
+instance.play()     // Resume
+instance.restart()  // Start over
+instance.destroy()  // Clean up
+```

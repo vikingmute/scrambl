@@ -1,0 +1,192 @@
+---
+import '@fontsource/geist-mono/latin-400.css'
+import '@fontsource/geist-mono/latin-500.css'
+import '@fontsource/geist-mono/latin-600.css'
+import '@fontsource/geist-mono/latin-700.css'
+import '@fontsource/geist-mono/latin-800.css'
+
+const title = 'Scrambl - Text Scramble Effects'
+const description =
+  'Zero-dependency text scramble animation library for Vanilla JS, React, and Vue.'
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="stylesheet" href="/home.css" />
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <main class="shell">
+    <div class="frame-corner frame-corner-tl" aria-hidden="true"></div>
+    <div class="frame-corner frame-corner-tr" aria-hidden="true"></div>
+    <div class="frame-corner frame-corner-bl" aria-hidden="true"></div>
+    <div class="frame-corner frame-corner-br" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Scrambl home">
+        <span class="brand-mark" aria-hidden="true">
+          <img class="brand-logo" src="/logo-mark.webp" alt="" width="288" height="225" />
+        </span>
+        <span>
+          <span class="brand-name scramble-el">Scrambl</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/guides/installation/">Docs</a>
+        <a href="/guides/quick-start/">Guide</a>
+        <a href="/examples/demo-lab/">Demo Lab</a>
+        <a href="https://github.com/vikingmute/scrambl">Repo</a>
+      </nav>
+      <div class="status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="clock">SYNC 00:00:00</span>
+      </div>
+    </header>
+
+    <section class="stage">
+      <div class="hero">
+        <p class="kicker">Zero-dependency text scramble animations for Vanilla JS, React and Vue.</p>
+        <h1 class="headline">
+          <span class="scramble-el" id="headTop">Scramble</span>
+          <span class="accent scramble-el" id="headBottom">text</span>
+        </h1>
+        <div class="dot-word" aria-hidden="true">
+          <span>S</span><span>C</span><span>R</span><span>A</span><span>M</span><span>B</span><span>L</span>
+        </div>
+        <div class="command-row">
+          <a href="/guides/installation/" class="action">Get Started</a>
+          <button class="chip is-active" type="button" data-mode="blocks">blocks</button>
+          <button class="chip" type="button" data-mode="symbols">symbols</button>
+          <button class="chip" type="button" data-mode="numbers">numbers</button>
+          <button class="chip" type="button" data-mode="braille">braille</button>
+        </div>
+      </div>
+
+      <aside class="side-panel package-panel" aria-label="Core features">
+        <div class="panel-row panel-head">
+          <span>Core features</span>
+          <i aria-hidden="true"></i>
+        </div>
+        <dl class="capability-list">
+          <div>
+            <dt>10 charsets</dt>
+            <dd>Blocks, braille, symbols, binary, hex, kana, and custom strings</dd>
+          </div>
+          <div>
+            <dt>Stable layout</dt>
+            <dd>Auto cells for symbols, blocks, braille, kana, and CJK mixed text</dd>
+          </div>
+          <div>
+            <dt>Demo Lab</dt>
+            <dd>Replayable examples for duration, perturbation, render modes, and multilingual text</dd>
+          </div>
+          <div>
+            <dt>Adapters</dt>
+            <dd>Vanilla DOM, React hook, Vue composable</dd>
+          </div>
+        </dl>
+        <div class="payload-grid" id="fwGrid">
+          <button class="payload-button is-active" type="button" data-fw="vanilla">Vanilla JS</button>
+          <button class="payload-button" type="button" data-fw="react">React</button>
+          <button class="payload-button" type="button" data-fw="vue">Vue</button>
+          <button class="payload-button" type="button" data-fw="docs">API Docs</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="code-section">
+      <div class="code-panel">
+        <div class="code-header">
+          <span id="codeFilename">app.ts</span>
+          <small>TypeScript</small>
+        </div>
+        <pre class="code-body"><code id="codeBlock">import &#123; scramble &#125; from '@scrambl/core'
+
+scramble(document.querySelector('h1'), &#123;
+  text: 'Hello World',
+  chars: 'blocks',
+  from: 'left',
+  duration: 800,
+  ease: 'easeOutCubic',
+&#125;)</code></pre>
+      </div>
+    </section>
+
+    <section class="playground">
+      <div class="pg-header">
+        <h2 class="pg-title">Playground</h2>
+        <span class="pg-hint">Try it yourself</span>
+      </div>
+      <div class="pg-body">
+        <div class="pg-preview">
+          <div class="pg-output" id="pgOutput">Hello, Scrambl!</div>
+        </div>
+        <div class="pg-controls">
+          <div class="pg-field">
+            <label class="pg-label" for="pgText">text</label>
+            <textarea class="pg-input pg-textarea" id="pgText" rows="3" spellcheck="false" autocomplete="off">Hello, Scrambl!</textarea>
+          </div>
+          <div class="pg-field">
+            <label class="pg-label" for="pgChars">chars</label>
+            <div class="pg-chip-row" id="pgCharsRow">
+              <button class="pg-chip is-active" type="button" data-chars="blocks">blocks</button>
+              <button class="pg-chip" type="button" data-chars="symbols">symbols</button>
+              <button class="pg-chip" type="button" data-chars="numbers">numbers</button>
+              <button class="pg-chip" type="button" data-chars="braille">braille</button>
+              <button class="pg-chip" type="button" data-chars="katakana">katakana</button>
+              <button class="pg-chip" type="button" data-chars="binary">binary</button>
+              <button class="pg-chip" type="button" data-chars="hex">hex</button>
+            </div>
+          </div>
+          <div class="pg-field">
+            <label class="pg-label" for="pgFrom">direction</label>
+            <div class="pg-chip-row" id="pgFromRow">
+              <button class="pg-chip is-active" type="button" data-dir="left">left</button>
+              <button class="pg-chip" type="button" data-dir="right">right</button>
+              <button class="pg-chip" type="button" data-dir="center">center</button>
+              <button class="pg-chip" type="button" data-dir="random">random</button>
+            </div>
+          </div>
+          <div class="pg-field">
+            <label class="pg-label" for="pgDuration">duration</label>
+            <div class="pg-range-row">
+              <input class="pg-range" type="range" id="pgDuration" min="200" max="3000" value="800" step="100" />
+              <span class="pg-range-val" id="pgDurationVal">800ms</span>
+            </div>
+          </div>
+          <div class="pg-field">
+            <label class="pg-label" for="pgCursor">cursor</label>
+            <input class="pg-input pg-input-sm" type="text" id="pgCursor" value="" placeholder="e.g. ░▒▓█" spellcheck="false" autocomplete="off" />
+          </div>
+          <button class="pg-run" type="button" id="pgRun">Run Scramble</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature"><dt>Zero Dependencies</dt><dd>Pure TypeScript, ~3KB gzipped. No runtime bloat.</dd></div>
+      <div class="feature"><dt>60fps Engine</dt><dd>requestAnimationFrame-driven with play / pause / restart control.</dd></div>
+      <div class="feature"><dt>10 Charsets</dt><dd>blocks, braille, katakana, binary, hex, symbols, and custom strings.</dd></div>
+      <div class="feature"><dt>Directional Reveal</dt><dd>Left, right, center, or random reveal with perturbation.</dd></div>
+      <div class="feature"><dt>Duration Control</dt><dd>Default reveal pacing now fills the configured duration instead of finishing early.</dd></div>
+      <div class="feature"><dt>Multiline Text</dt><dd>Cells preserve line breaks and keep final frames stable for repeated playback.</dd></div>
+      <div class="feature"><dt>CJK Mixed Width</dt><dd>Chinese, kana, and Latin glyphs get width-aware cells for multilingual layouts.</dd></div>
+      <div class="feature"><dt>Stable Symbols</dt><dd>Symbols, braille, blocks, and full-width glyphs use centered cells to reduce jitter.</dd></div>
+      <div class="feature"><dt>Framework Adapters</dt><dd>React hooks, Vue composables. Trigger on hover, click, or scroll.</dd></div>
+    </section>
+
+    <footer class="footer">
+      <span>Hover headline to re-scramble - chips change charset</span>
+      <span>MIT - <a href="/guides/installation/">docs</a></span>
+    </footer>
+  </main>
+
+  <script is:inline src="/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+---
+title: Vue
+description: Vue composables and components for text scramble effects.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+## Installation
+
+```bash
+npm install @scrambl/vue
+```
+
+## useScramble Composable
+
+The primary API for Vue — returns a template ref and control functions.
+
+```vue
+<script setup>
+import { useScramble } from '@scrambl/vue'
+
+const { ref, replay, pause, resume, isPlaying } = useScramble({
+  text: 'Hello World',
+  chars: 'blocks',
+  from: 'left',
+  duration: 800,
+  trigger: 'hover',
+  playOnMount: true,
+})
+</script>
+
+<template>
+  <div>
+    <h1 ref="ref" />
+    <button @click="replay">Replay</button>
+    <span v-if="isPlaying">Playing...</span>
+  </div>
+</template>
+```
+
+### Options
+
+`useScramble` accepts all [ScrambleOptions](/api/options/) plus:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `trigger` | `'hover' \| 'click' \| 'inView' \| 'manual'` | `'manual'` | Auto-trigger behavior |
+| `playOnMount` | `boolean` | `true` | Play immediately on mount |
+| `inViewOptions` | `IntersectionObserverInit` | `{ threshold: 0.1 }` | Options for `trigger: 'inView'` |
+
+### Return Value
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `ref` | `Ref<HTMLElement \| null>` | Template ref for the target element |
+| `replay` | `() => void` | Restart the animation |
+| `pause` | `() => void` | Pause the animation |
+| `resume` | `() => void` | Resume a paused animation |
+| `isPlaying` | `Ref<boolean>` | Reactive playing state |
+
+## ScrambleText Component
+
+A ready-to-use component:
+
+```vue
+<script setup>
+import { ScrambleText } from '@scrambl/vue'
+</script>
+
+<template>
+  <ScrambleText
+    as="h1"
+    text="Hello World"
+    chars="blocks"
+    trigger="hover"
+  />
+</template>
+```
+
+### Props
+
+Accepts all scramble options as props plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `string` | `'span'` | HTML element tag to render |
+
+### Exposed Methods
+
+Access the component's methods via template ref:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { ScrambleText } from '@scrambl/vue'
+
+const scrambleRef = ref()
+</script>
+
+<template>
+  <ScrambleText ref="scrambleRef" text="Hello" chars="blocks" />
+  <button @click="scrambleRef?.replay()">Replay</button>
+</template>
+```
+
+## Patterns
+
+### Scroll Reveal
+
+```vue
+<script setup>
+import { useScramble } from '@scrambl/vue'
+
+const { ref } = useScramble({
+  text: 'Revealed on scroll',
+  chars: 'braille',
+  trigger: 'inView',
+  playOnMount: false,
+  duration: 1200,
+  from: 'random',
+})
+</script>
+
+<template>
+  <p ref="ref" />
+</template>
+```
+
+### Text Cycling
+
+```vue
+<script setup>
+import { ref as vueRef, onMounted, onUnmounted } from 'vue'
+import { useScramble } from '@scrambl/vue'
+
+const words = ['Developer', 'Designer', 'Creator']
+const index = vueRef(0)
+
+const { ref, replay } = useScramble({
+  text: words[index.value],
+  chars: 'katakana',
+  duration: 600,
+})
+
+let timer: number
+onMounted(() => {
+  timer = window.setInterval(() => {
+    index.value = (index.value + 1) % words.length
+    replay()
+  }, 3000)
+})
+onUnmounted(() => clearInterval(timer))
+</script>
+
+<template>
+  <span ref="ref" />
+</template>
+```

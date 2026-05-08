@@ -1,0 +1,49 @@
+---
+title: Options
+description: Full reference for ScrambleOptions.
+---
+
+## ScrambleOptions
+
+All parameters are optional unless noted.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `string` | element's textContent | Target text to reveal |
+| `from` | `'left' \| 'right' \| 'center' \| 'random'` | `'left'` | Direction of character reveal |
+| `chars` | preset name or custom string | `'blocks'` | Characters used during scramble. See [Character Sets](/api/charsets/) |
+| `cursor` | `string` | `''` | Cursor pattern for sweep effect at the reveal front |
+| `duration` | `number` | `800` | Total animation duration in ms |
+| `delay` | `number` | `0` | Delay before animation starts in ms |
+| `ease` | easing name or `(t: number) => number` | `'linear'` | Easing function. See [Easing](/api/easing/) |
+| `steps` | `number` | `10` | Step count when `ease` is `'steps'` |
+| `perturbation` | `number` (0–1) | `0` | Randomization of reveal timing |
+| `revealRate` | `number` | auto | Maximum interval between character reveals in ms |
+| `settleDuration` | `number` | `250` | Time for each character to settle in ms |
+| `settleRate` | `number` | `30` | Interval between settle steps in ms |
+| `reversed` | `boolean` | `false` | Reverse the animation direction |
+| `override` | `string \| false` | `false` | Override initial text (e.g. `''` to start blank) |
+| `fill` | `string` | `' '` | Fill character for text length differences |
+| `seed` | `number` | random | Seed for deterministic random generation |
+| `speed` | `number` | `1` | Playback speed multiplier |
+| `loop` | `boolean \| number` | `false` | Loop: `true` for infinite, or a count |
+| `renderMode` | `'auto' \| 'text' \| 'cells'` | `'auto'` | DOM rendering strategy. Auto uses stable cells for visually uneven glyphs such as symbols, braille, blocks, or full-width kana |
+
+## Callbacks
+
+| Callback | Type | Description |
+|----------|------|-------------|
+| `onStart` | `() => void` | Fires when animation starts |
+| `onChange` | `(text: string, progress: number) => void` | Fires each frame with current text and progress |
+| `onComplete` | `() => void` | Fires when animation finishes |
+
+## TriggerType (React / Vue only)
+
+Framework adapters support an additional `trigger` option:
+
+| Value | Description |
+|-------|-------------|
+| `'manual'` | Only plays when `play()` or `replay()` is called |
+| `'hover'` | Replays on `pointerenter` |
+| `'click'` | Replays on `click` |
+| `'inView'` | Plays once when the element enters the viewport |

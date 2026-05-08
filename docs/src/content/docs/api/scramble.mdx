@@ -1,0 +1,78 @@
+---
+title: scramble()
+description: Animate scramble text on a DOM element.
+---
+
+## Signature
+
+```ts
+function scramble(element: HTMLElement, options?: ScrambleOptions): ScrambleInstance
+```
+
+## Parameters
+
+### `element`
+
+The target DOM element whose `textContent` will be animated.
+
+### `options`
+
+See [Options](/api/options/) for the full list.
+
+## Returns
+
+A `ScrambleInstance` with playback controls:
+
+| Method | Description |
+|--------|-------------|
+| `play()` | Start or resume the animation |
+| `pause()` | Pause the animation |
+| `restart()` | Restart from the beginning |
+| `destroy()` | Stop and clean up resources |
+| `isPlaying` | `boolean` — whether the animation is playing |
+| `progress` | `number` — current progress (0 to 1) |
+
+## Example
+
+```ts
+import { scramble } from '@scrambl/core'
+
+const el = document.querySelector('#title')
+
+const instance = scramble(el, {
+  text: 'Hello World',
+  chars: 'katakana',
+  from: 'center',
+  duration: 1000,
+  ease: 'easeOutCubic',
+  onComplete: () => console.log('Done!'),
+})
+
+// Later...
+instance.pause()
+instance.restart()
+```
+
+## Behavior
+
+1. Reads the element's current `textContent` as the "from" text (unless `override` is set).
+2. Starts a `requestAnimationFrame` loop that updates `textContent` each frame.
+3. Characters transition through random glyphs from the `chars` set before settling on their final value.
+4. The reveal order is determined by the `from` direction, optionally shuffled by `perturbation`.
+5. On completion, the exact target text is rendered and `onComplete` fires.
+
+## Stable Layout
+
+Some glyph sets, especially `symbols`, `braille`, `blocks`, and `katakanaFull`, may use fallback fonts or glyph metrics that differ from your target text. Scrambl uses stable cell rendering automatically for those glyphs.
+
+You can also force the strategy explicitly:
+
+```ts
+scramble(el, {
+  text: 'Hello World',
+  chars: 'braille',
+  renderMode: 'cells',
+})
+```
+
+This renders each character inside a fixed-width inline cell during the animation and keeps that stable layout on the final frame. Cells are cleaned up when the instance is destroyed or replayed.

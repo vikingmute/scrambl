@@ -1,0 +1,53 @@
+---
+title: createScrambler()
+description: Create a headless scrambler for custom rendering targets.
+---
+
+## Signature
+
+```ts
+function createScrambler(options: CreateScramblerOptions): ScrambleInstance
+```
+
+## When to Use
+
+Use `createScrambler()` when you need scramble text output without direct DOM mutation — for example:
+
+- Rendering to a `<canvas>`
+- Driving React/Vue state manually
+- Server-side text generation
+- Custom animation pipelines
+
+## Parameters
+
+### `options`
+
+Extends `ScrambleOptions` with:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `text` | `string` | **Required.** The target text to reveal. |
+| `fromText` | `string` | The source text to transition from. Default: `''` |
+| `onFrame` | `(text: string, progress: number) => void` | Called every frame with the current text. |
+
+All other options from [Options](/api/options/) are supported (`chars`, `from`, `duration`, etc.).
+
+## Example
+
+```ts
+import { createScrambler } from '@scrambl/core'
+
+const scrambler = createScrambler({
+  text: 'Loading complete',
+  fromText: 'Please wait...',
+  chars: 'blocks',
+  duration: 1000,
+  onFrame: (text, progress) => {
+    myCanvas.clear()
+    myCanvas.drawText(text, 100, 200)
+  },
+  onComplete: () => {
+    console.log('Animation finished')
+  },
+})
+```

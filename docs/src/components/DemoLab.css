@@ -1,0 +1,255 @@
+.demo-lab {
+  margin-top: 2rem;
+}
+
+.demo-lab__header {
+  align-items: end;
+  border-block: 1px solid color-mix(in srgb, var(--sl-color-gray-5), transparent 25%);
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+}
+
+.demo-lab__header h2 {
+  font-size: clamp(2rem, 7vw, 4.4rem);
+  letter-spacing: 0;
+  line-height: 0.94;
+  margin: 0.2rem 0;
+}
+
+.demo-lab__header p {
+  color: var(--sl-color-gray-2);
+  margin: 0;
+  max-width: 44rem;
+}
+
+.demo-lab__header button {
+  background: var(--sl-color-accent);
+  border: 0;
+  border-radius: 6px;
+  color: var(--sl-color-black);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.demo-lab__header button:hover {
+  background: var(--sl-color-accent-high);
+}
+
+.demo-eyebrow {
+  color: var(--sl-color-accent-high);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.demo-workbench {
+  border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-5), transparent 25%);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 0.92fr) minmax(18rem, 1.08fr);
+  padding: 1.5rem 0;
+}
+
+.demo-workbench__preview {
+  align-content: center;
+  background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--sl-color-accent-low), transparent 25%) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in srgb, var(--sl-color-accent-low), transparent 25%) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  min-height: 17rem;
+  overflow: hidden;
+  padding: 1.2rem;
+}
+
+.demo-workbench__output {
+  color: var(--sl-color-white);
+  font-size: clamp(1.85rem, 8vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-top: 1rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.demo-controls {
+  display: grid;
+  gap: 1rem;
+}
+
+.demo-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.demo-field > span {
+  color: var(--sl-color-gray-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.demo-field input[type="text"],
+.demo-field input:not([type]),
+.demo-field textarea {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  color: var(--sl-color-white);
+  font: inherit;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.75rem;
+  width: 100%;
+}
+
+.demo-field textarea {
+  line-height: 1.4;
+  min-height: 5.8rem;
+  resize: vertical;
+}
+
+.demo-field input[type="range"] {
+  accent-color: var(--sl-color-accent);
+  width: 100%;
+}
+
+.demo-segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.demo-segmented button {
+  background: transparent;
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-gray-2);
+  font-size: 0.8rem;
+  min-height: 2rem;
+  padding: 0.4rem 0.65rem;
+}
+
+.demo-segmented button.is-active {
+  background: var(--sl-color-accent-low);
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-accent-high);
+}
+
+.demo-segmented--compact button {
+  min-width: 4.25rem;
+}
+
+.demo-range-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demo-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: 1.5rem;
+}
+
+.demo-tile {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-rows: auto minmax(5rem, auto) auto;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.demo-tile__meta {
+  align-items: start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.demo-tile__meta div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.demo-tile__meta span {
+  color: var(--sl-color-white);
+  font-weight: 800;
+}
+
+.demo-tile__meta small {
+  color: var(--sl-color-gray-3);
+}
+
+.demo-tile__replay {
+  background: transparent;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  color: var(--sl-color-gray-2);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.76rem;
+  min-height: 2rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.demo-tile__replay:hover {
+  background: var(--sl-color-accent-low);
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-accent-high);
+}
+
+.demo-tile__output {
+  align-content: center;
+  color: var(--sl-color-accent-high);
+  font-size: clamp(1.15rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.08;
+  min-height: 5rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.demo-tile__code {
+  background: var(--sl-color-black);
+  border-radius: 6px;
+  color: var(--sl-color-gray-2);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  max-height: 12rem;
+  overflow: auto;
+  padding: 0.75rem;
+}
+
+@media (max-width: 58rem) {
+  .demo-lab__header,
+  .demo-workbench,
+  .demo-grid,
+  .demo-range-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-lab__header {
+    align-items: start;
+    display: grid;
+  }
+}

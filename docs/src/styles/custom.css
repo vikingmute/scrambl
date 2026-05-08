@@ -1,0 +1,121 @@
+@import "@fontsource/geist-mono/latin-400.css";
+@import "@fontsource/geist-mono/latin-500.css";
+@import "@fontsource/geist-mono/latin-600.css";
+@import "@fontsource/geist-mono/latin-700.css";
+@import "@fontsource/geist-mono/latin-800.css";
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --sl-color-accent-low: #132b1b;
+  --sl-color-accent: #83cf8f;
+  --sl-color-accent-high: #9bf3a7;
+  --sl-color-white: #e8ebe7;
+  --sl-color-gray-1: #e8ebe7;
+  --sl-color-gray-2: #b9c1bb;
+  --sl-color-gray-3: #707a73;
+  --sl-color-gray-4: #3d4641;
+  --sl-color-gray-5: #26302b;
+  --sl-color-gray-6: #101714;
+  --sl-color-black: #070a09;
+  --sl-color-text: #b9c1bb;
+  --sl-color-text-accent: #9bf3a7;
+  --sl-color-text-invert: #071008;
+  --sl-color-bg: #070a09;
+  --sl-color-bg-nav: rgba(7, 11, 10, 0.94);
+  --sl-color-bg-sidebar: rgba(7, 11, 10, 0.86);
+  --sl-color-bg-inline-code: rgba(131, 207, 143, 0.12);
+  --sl-color-bg-accent: #83cf8f;
+  --sl-color-hairline-light: rgba(206, 220, 208, 0.18);
+  --sl-color-hairline: rgba(206, 220, 208, 0.14);
+  --sl-color-hairline-shade: #050706;
+  --sl-color-backdrop-overlay: rgba(0, 0, 0, 0.72);
+  --sl-font-system: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  --sl-font-system-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+}
+
+:root[data-theme="light"] {
+  color-scheme: dark;
+  --sl-color-accent-low: #132b1b;
+  --sl-color-accent: #83cf8f;
+  --sl-color-accent-high: #9bf3a7;
+  --sl-color-white: #e8ebe7;
+  --sl-color-gray-1: #e8ebe7;
+  --sl-color-gray-2: #b9c1bb;
+  --sl-color-gray-3: #707a73;
+  --sl-color-gray-4: #3d4641;
+  --sl-color-gray-5: #26302b;
+  --sl-color-gray-6: #101714;
+  --sl-color-black: #070a09;
+  --sl-color-text: #b9c1bb;
+  --sl-color-text-accent: #9bf3a7;
+  --sl-color-text-invert: #071008;
+  --sl-color-bg: #070a09;
+  --sl-color-bg-nav: rgba(7, 11, 10, 0.94);
+  --sl-color-bg-sidebar: rgba(7, 11, 10, 0.86);
+  --sl-color-bg-inline-code: rgba(131, 207, 143, 0.12);
+  --sl-color-bg-accent: #83cf8f;
+  --sl-color-hairline-light: rgba(206, 220, 208, 0.18);
+  --sl-color-hairline: rgba(206, 220, 208, 0.14);
+  --sl-color-hairline-shade: #050706;
+  --sl-color-backdrop-overlay: rgba(0, 0, 0, 0.72);
+}
+
+html,
+body {
+  background: radial-gradient(circle at 50% 12%, rgba(131, 207, 143, 0.1), transparent 28rem),
+    linear-gradient(rgba(232, 235, 231, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 235, 231, 0.025) 1px, transparent 1px), #070a09;
+  background-size: auto, 18px 18px, 18px 18px, auto;
+}
+
+body {
+  letter-spacing: 0;
+}
+
+.header {
+  border-bottom: 1px solid rgba(206, 220, 208, 0.18);
+}
+
+.site-title,
+.site-title:hover {
+  color: #e8ebe7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar-pane,
+.right-sidebar,
+header.header {
+  background: rgba(7, 11, 10, 0.86);
+  backdrop-filter: blur(16px);
+}
+
+.sidebar-pane {
+  border-inline-end: 1px solid rgba(206, 220, 208, 0.14);
+}
+
+.right-sidebar {
+  border-inline-start: 1px solid rgba(206, 220, 208, 0.14);
+}
+
+a {
+  text-decoration-color: rgba(131, 207, 143, 0.4);
+}
+
+a:hover {
+  color: #9bf3a7;
+}
+
+code:not(:where(.ec-line code)) {
+  border: 1px solid rgba(131, 207, 143, 0.16);
+  color: #9bf3a7;
+}
+
+.expressive-code,
+.card,
+.sl-markdown-content table {
+  border-color: rgba(206, 220, 208, 0.18);
+}
