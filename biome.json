@@ -28,6 +28,12 @@
     }
   },
   "files": {
-    "ignore": ["**/dist/**", "**/node_modules/**", "**/.turbo/**"]
+    "ignore": [
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/.turbo/**",
+      "**/.astro/**",
+      "docs/public/home.js"
+    ]
   }
 }

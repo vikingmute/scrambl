@@ -37,7 +37,6 @@ export function buildRevealOrder(
     case 'random':
       baseOrder = shuffleArray(indices, rng)
       break
-    case 'left':
     default:
       baseOrder = indices.slice()
       break

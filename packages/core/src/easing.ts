@@ -8,12 +8,21 @@ export const easings: Record<EasingName, (steps?: number) => EasingFn> = {
   easeOutQuad: () => (t) => t * (2 - t),
   easeInOutQuad: () => (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
   easeInCubic: () => (t) => t * t * t,
-  easeOutCubic: () => (t) => --t * t * t + 1,
-  easeInOutCubic: () => (t) =>
-    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+  easeOutCubic: () => (t) => {
+    const shifted = t - 1
+    return shifted * shifted * shifted + 1
+  },
+  easeInOutCubic: () => (t) => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1),
   easeInQuart: () => (t) => t * t * t * t,
-  easeOutQuart: () => (t) => 1 - --t * t * t * t,
-  easeInOutQuart: () => (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t),
+  easeOutQuart: () => (t) => {
+    const shifted = t - 1
+    return 1 - shifted * shifted * shifted * shifted
+  },
+  easeInOutQuart: () => (t) => {
+    if (t < 0.5) return 8 * t * t * t * t
+    const shifted = t - 1
+    return 1 - 8 * shifted * shifted * shifted * shifted
+  },
   easeInExpo: () => (t) => (t === 0 ? 0 : pow(2, 10 * (t - 1))),
   easeOutExpo: () => (t) => (t === 1 ? 1 : 1 - pow(2, -10 * t)),
   easeInOutExpo: () => (t) => {
@@ -26,10 +35,7 @@ export const easings: Record<EasingName, (steps?: number) => EasingFn> = {
       Math.ceil(t * n) / n,
 }
 
-export function resolveEasing(
-  ease: EasingName | EasingFn | undefined,
-  steps?: number,
-): EasingFn {
+export function resolveEasing(ease: EasingName | EasingFn | undefined, steps?: number): EasingFn {
   if (typeof ease === 'function') return ease
   const name = ease || 'linear'
   const factory = easings[name]

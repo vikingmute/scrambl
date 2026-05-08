@@ -19,8 +19,20 @@
     }
   },
   "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "license": "MIT",
+  "homepage": "https://scrambl.vikingz.me",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikingmute/scrambl.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/vikingmute/scrambl/issues"
+  },
   "keywords": [
     "scramble",
     "text",

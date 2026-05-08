@@ -4,8 +4,16 @@ import { CHARSETS, resolveCharset } from '../charsets'
 describe('CHARSETS', () => {
   it('contains all preset keys', () => {
     const presets = [
-      'lowercase', 'uppercase', 'numbers', 'symbols',
-      'braille', 'blocks', 'shades', 'katakana', 'binary', 'hex',
+      'lowercase',
+      'uppercase',
+      'numbers',
+      'symbols',
+      'braille',
+      'blocks',
+      'shades',
+      'katakana',
+      'binary',
+      'hex',
     ]
     for (const key of presets) {
       expect(CHARSETS).toHaveProperty(key)

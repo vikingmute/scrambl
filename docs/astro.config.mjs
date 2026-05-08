@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config'
 const isDevServer = process.argv.includes('dev')
 
 export default defineConfig({
-  site: 'https://scrambl.dev',
+  site: 'https://scrambl.vikingz.me',
   vite: {
     cacheDir: isDevServer ? './node_modules/.vite-dev' : './node_modules/.vite-build',
     resolve: {
@@ -22,7 +22,7 @@ export default defineConfig({
       description:
         'Zero-dependency text scramble animation library for Vanilla JS, React, and Vue.',
       social: {
-        github: 'https://github.com/scrambl/scrambl',
+        github: 'https://github.com/vikingmute/scrambl',
       },
       components: {
         ThemeProvider: './src/components/DarkThemeProvider.astro',

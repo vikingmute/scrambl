@@ -20,25 +20,26 @@ export interface ScrambleTextRef {
   isPlaying: boolean
 }
 
-export const ScrambleText = forwardRef<ScrambleTextRef, ScrambleTextProps>(
-  function ScrambleText(
-    { as: Tag = 'span', className, style, ...scrambleOpts },
-    forwardedRef,
-  ) {
-    const { ref, replay, pause, resume, isPlaying } = useScramble(scrambleOpts)
+export const ScrambleText = forwardRef<ScrambleTextRef, ScrambleTextProps>(function ScrambleText(
+  { as: Tag = 'span', className, style, ...scrambleOpts },
+  forwardedRef,
+) {
+  const { ref, replay, pause, resume, isPlaying } = useScramble(scrambleOpts)
 
-    useImperativeHandle(forwardedRef, () => ({
-      replay,
-      pause,
-      resume,
-      isPlaying,
-    }))
+  useImperativeHandle(forwardedRef, () => ({
+    replay,
+    pause,
+    resume,
+    isPlaying,
+  }))
 
-    return React.createElement(Tag, {
+  return React.createElement(
+    Tag,
+    {
       ref,
       className,
       style,
-      children: scrambleOpts.text ?? '',
-    })
-  },
-)
+    },
+    scrambleOpts.text ?? '',
+  )
+})

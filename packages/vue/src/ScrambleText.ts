@@ -1,5 +1,11 @@
-import { defineComponent, h, type PropType } from 'vue'
-import type { TriggerType, RevealDirection, CharsetPreset, EasingName, EasingFn } from '@scrambl/core'
+import type {
+  CharsetPreset,
+  EasingFn,
+  EasingName,
+  RevealDirection,
+  TriggerType,
+} from '@scrambl/core'
+import { type PropType, defineComponent, h } from 'vue'
 import { useScramble } from './useScramble'
 
 export const ScrambleText = defineComponent({
@@ -35,7 +41,6 @@ export const ScrambleText = defineComponent({
 
     expose({ replay, pause, resume, isPlaying })
 
-    return () =>
-      h(props.as, { ref, textContent: props.text })
+    return () => h(props.as, { ref, textContent: props.text })
   },
 })

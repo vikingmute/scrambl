@@ -11,7 +11,8 @@ export const CHARSETS: Record<CharsetPreset, string> = {
   // Half-width katakana — same visual width as Latin chars in monospace fonts
   katakana: 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ',
   // Full-width katakana — use with CJK target text or proportional fonts
-  katakanaFull: 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
+  katakanaFull:
+    'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
   binary: '01',
   hex: '0123456789ABCDEF',
 }

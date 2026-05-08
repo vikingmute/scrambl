@@ -1,6 +1,6 @@
-import { onMounted, onUnmounted, ref, watch, type Ref } from 'vue'
 import type { ScrambleInstance, ScrambleOptions, TriggerType } from '@scrambl/core'
 import { scramble } from '@scrambl/core'
+import { type Ref, onMounted, onUnmounted, ref, watch } from 'vue'
 
 export interface UseScrambleOptions extends ScrambleOptions {
   /** When to trigger the scramble animation. Default: 'manual'. */
@@ -25,12 +25,7 @@ export interface UseScrambleReturn {
 }
 
 export function useScramble(options: UseScrambleOptions): UseScrambleReturn {
-  const {
-    trigger = 'manual',
-    playOnMount = true,
-    inViewOptions,
-    ...scrambleOpts
-  } = options
+  const { trigger = 'manual', playOnMount = true, inViewOptions, ...scrambleOpts } = options
 
   const targetRef = ref<HTMLElement | null>(null)
   const isPlaying = ref(false)
