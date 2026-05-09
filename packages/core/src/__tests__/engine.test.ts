@@ -503,6 +503,80 @@ describe('scramble DOM rendering', () => {
     instance.destroy()
   })
 
+  it('keeps Latin target cells narrow when scrambling with full-width kana', () => {
+    class FakeElement {
+      className = ''
+      style: Record<string, string> = { whiteSpace: '' }
+      children: FakeElement[] = []
+      private attrs = new Map<string, string>()
+      private text = ''
+
+      get textContent() {
+        return this.text
+      }
+
+      set textContent(value: string | null) {
+        this.text = value ?? ''
+        this.children = []
+      }
+
+      setAttribute(name: string, value: string) {
+        this.attrs.set(name, value)
+      }
+
+      getAttribute(name: string) {
+        return this.attrs.get(name) ?? null
+      }
+
+      removeAttribute(name: string) {
+        this.attrs.delete(name)
+      }
+
+      appendChild(child: FakeElement) {
+        this.children.push(child)
+        return child
+      }
+
+      querySelector(selector: string) {
+        return this.querySelectorAll(selector)[0] ?? null
+      }
+
+      querySelectorAll(selector: string) {
+        const className = selector.startsWith('.') ? selector.slice(1) : selector
+        return this.children.filter((child) => child.className === className)
+      }
+    }
+
+    let frameCount = 0
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+      const shouldRun = frameCount === 0
+      frameCount++
+      if (shouldRun) cb(0)
+      return 1
+    })
+    vi.stubGlobal('cancelAnimationFrame', () => {})
+    vi.stubGlobal('document', {
+      createElement: () => new FakeElement(),
+    })
+
+    const el = new FakeElement()
+    el.textContent = 'AB'
+
+    const instance = scramble(el as unknown as HTMLElement, {
+      text: 'AB',
+      override: '',
+      chars: 'katakanaFull',
+      duration: 100,
+      seed: 1,
+    })
+
+    const cells = el.querySelectorAll('.scrambl-cell')
+    expect(cells[0].style.width).toBe('1ch')
+    expect(cells[1].style.width).toBe('1ch')
+
+    instance.destroy()
+  })
+
   it('keeps fixed-width cells on the final frame to avoid layout jumps', () => {
     class FakeElement {
       tagName = ''

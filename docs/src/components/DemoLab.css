@@ -2,6 +2,10 @@
   margin-top: 2rem;
 }
 
+.demo-lab :is(button, input, textarea, pre) {
+  margin: 0;
+}
+
 .demo-lab__header {
   align-items: end;
   border-block: 1px solid color-mix(in srgb, var(--sl-color-gray-5), transparent 25%);

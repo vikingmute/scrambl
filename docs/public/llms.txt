@@ -1,0 +1,49 @@
+# Scrambl
+
+Scrambl is a zero-dependency TypeScript library for text scramble, decode, and reveal animations on the web.
+
+Documentation: https://scrambl.vikingz.me/
+Repository: https://github.com/vikingmute/scrambl
+
+npm packages:
+- https://www.npmjs.com/package/@scrambl/core
+- https://www.npmjs.com/package/@scrambl/react
+- https://www.npmjs.com/package/@scrambl/vue
+
+## Documentation
+
+- Installation: https://scrambl.vikingz.me/guides/installation/
+- Quick Start: https://scrambl.vikingz.me/guides/quick-start/
+- Core scramble API: https://scrambl.vikingz.me/api/scramble/
+- Headless scrambler API: https://scrambl.vikingz.me/api/create-scrambler/
+- Options reference: https://scrambl.vikingz.me/api/options/
+- Character sets: https://scrambl.vikingz.me/api/charsets/
+- Easing functions: https://scrambl.vikingz.me/api/easing/
+- React adapter: https://scrambl.vikingz.me/frameworks/react/
+- Vue adapter: https://scrambl.vikingz.me/frameworks/vue/
+- Demo Lab: https://scrambl.vikingz.me/examples/demo-lab/
+- Recipes: https://scrambl.vikingz.me/examples/recipes/
+
+## Packages
+
+@scrambl/core: Core scramble engine for DOM rendering and headless custom renderers.
+@scrambl/react: React hook and ScrambleText component powered by @scrambl/core.
+@scrambl/vue: Vue composable and ScrambleText component powered by @scrambl/core.
+
+## Key Concepts
+
+- Zero dependencies.
+- TypeScript declarations included.
+- requestAnimationFrame-driven animation.
+- Built-in character presets include blocks, shades, braille, katakana, binary, hex, numbers, lowercase, uppercase, and symbols.
+- `katakana` uses half-width kana for Latin-width layouts.
+- `katakanaFull` uses full-width kana for CJK and proportional layouts.
+- Stable cell rendering is available through `renderMode: 'cells'` and selected automatically for glyph sets likely to shift layout.
+- React and Vue adapters support manual, hover, click, and in-view triggers.
+
+## Recommended Reading Order
+
+1. https://scrambl.vikingz.me/guides/installation/
+2. https://scrambl.vikingz.me/guides/quick-start/
+3. https://scrambl.vikingz.me/api/options/
+4. https://scrambl.vikingz.me/examples/demo-lab/

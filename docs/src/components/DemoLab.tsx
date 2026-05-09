@@ -295,7 +295,7 @@ export default function DemoLab() {
   const [replayToken, setReplayToken] = useState(0)
 
   return (
-    <div className="demo-lab">
+    <div className="demo-lab not-content">
       <div className="demo-lab__header">
         <div>
           <span className="demo-eyebrow">Examples</span>

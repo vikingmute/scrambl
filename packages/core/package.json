@@ -1,6 +1,6 @@
 {
   "name": "@scrambl/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zero-dependency text scramble animation engine",
   "type": "module",
   "main": "./dist/index.cjs",

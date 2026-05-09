@@ -54,6 +54,7 @@ export default defineConfig({
           items: [
             { label: 'Installation', link: '/guides/installation/' },
             { label: 'Quick Start', link: '/guides/quick-start/' },
+            { label: 'llms.txt', link: '/llms.txt' },
           ],
         },
         {

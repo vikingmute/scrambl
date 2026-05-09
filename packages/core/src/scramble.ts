@@ -23,7 +23,8 @@ function isWideGlyph(char: string | undefined) {
 }
 
 function cellWidthFor(currentChar: string, targetChar: string | undefined) {
-  return isWideGlyph(targetChar) || isWideGlyph(currentChar) ? '1em' : '1ch'
+  const widthReference = targetChar ?? currentChar
+  return isWideGlyph(widthReference) ? '1em' : '1ch'
 }
 
 function renderCells(element: HTMLElement, text: string, targetText: string) {
