@@ -1,6 +1,6 @@
 {
   "name": "@scrambl/vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue composables and components for @scrambl/core text scramble effects",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -18,7 +18,9 @@
       }
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
