@@ -27,7 +27,25 @@ All parameters are optional unless noted.
 | `seed` | `number` | random | Seed for deterministic random generation |
 | `speed` | `number` | `1` | Playback speed multiplier |
 | `loop` | `boolean \| number` | `false` | Loop: `true` for infinite, or a count |
-| `renderMode` | `'auto' \| 'text' \| 'cells'` | `'auto'` | DOM rendering strategy. Auto uses stable cells for visually uneven glyphs such as symbols, braille, blocks, or full-width kana |
+| `renderMode` | `'auto' \| 'text' \| 'cells'` | `'auto'` | DOM rendering strategy. `auto` chooses stable cells for glyph sets likely to shift layout, `text` keeps natural text flow, and `cells` forces fixed character cells |
+
+## Render Modes
+
+Scrambl supports three DOM rendering modes:
+
+- `auto`: safety-first default. It switches to stable character cells for glyph sets that are more likely to jump in width or trigger fallback-font jitter, such as symbols, braille, blocks, and full-width kana.
+- `text`: natural text flow. This is the best choice for proportional fonts, brand type, and editorial layouts where you want the final text to feel like normal typography.
+- `cells`: fixed character cells. This is the most stable option for visually uneven glyphs, terminal-style treatments, and monospace presentations.
+
+### Recommended usage
+
+- Use `auto` when you want a good default and do not need strict art direction.
+- Use `text` when the page uses a proportional font and you want the most natural result.
+- Use `cells` when you want the most stable decode effect and are happy with a gridded presentation.
+
+### Monospace guidance
+
+`cells` mode is optimized for monospace or monospace-like presentation. It can still be used with proportional fonts, but some fonts will look tighter or more mechanical because each character is rendered inside a fixed-width cell.
 
 ## Callbacks
 

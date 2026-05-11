@@ -82,7 +82,7 @@ the docs build ran before `@scrambl/core` was built.
 
 ## Publishing
 
-Use Changesets. The package versions are linked in `.changeset/config.json`, so `@scrambl/core`, `@scrambl/react`, and `@scrambl/vue` should move together.
+Use Changesets. Package versions are not force-linked, so release only the packages that actually need a new npm version.
 
 Release flow:
 
@@ -96,6 +96,8 @@ pnpm release
 ```
 
 See `RELEASE.md` for the full checklist, including npm verification, GitHub tags, and Cloudflare deployment.
+
+If only `@scrambl/core` changes, it is valid to release `@scrambl/core` alone. React and Vue should only be republished when their own code changes or when you intentionally want their published dependency graph to move to a newer `@scrambl/core`.
 
 ## Package Metadata
 
@@ -116,6 +118,9 @@ Each npm package has its own README. Those READMEs are the npm package pages, so
 - Vue-specific code belongs in `packages/vue`.
 - Docs examples should mirror the real package APIs.
 - Prefer small, direct APIs over new abstractions.
+- `renderMode: 'cells'` is the most stable visual mode but is best suited to monospace or monospace-like presentation.
+- For proportional fonts, prefer `renderMode: 'text'` unless the design explicitly wants a gridded decode look.
+- `renderMode: 'auto'` is a safety-first heuristic based on the scramble character set, not a font-aware typography optimizer.
 
 Formatting/linting is managed by Biome:
 
@@ -166,4 +171,3 @@ https://scrambl.vikingz.me/logo-mark.webp
 ```
 
 Keep this URL stable because npm and GitHub README rendering depend on it.
-

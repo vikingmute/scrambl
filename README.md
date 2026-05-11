@@ -115,6 +115,8 @@ const { ref, replay } = useScramble({
 - React and Vue adapters with `manual`, `hover`, `click`, and `inView` triggers.
 - Full TypeScript declarations included.
 
+For the most polished visual result with stable cell rendering, use a monospace or monospace-like font. If your design uses a proportional font, prefer `renderMode: 'text'` for the most natural typography.
+
 ## Character Sets
 
 ```ts

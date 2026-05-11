@@ -38,7 +38,10 @@ npm packages:
 - Built-in character presets include blocks, shades, braille, katakana, binary, hex, numbers, lowercase, uppercase, and symbols.
 - `katakana` uses half-width kana for Latin-width layouts.
 - `katakanaFull` uses full-width kana for CJK and proportional layouts.
-- Stable cell rendering is available through `renderMode: 'cells'` and selected automatically for glyph sets likely to shift layout.
+- Scrambl has three DOM render modes: `auto`, `text`, and `cells`.
+- `auto` is a safety-first mode based on the scramble character set, not on the page's active font.
+- `text` preserves natural text flow and is the preferred mode for proportional fonts.
+- `cells` uses fixed character cells for the most stable decode effect and looks best with monospace or monospace-like presentation.
 - React and Vue adapters support manual, hover, click, and in-view triggers.
 
 ## Recommended Reading Order
